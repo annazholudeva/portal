@@ -1,0 +1,44 @@
+{% extends 'flatpages/default.html' %}
+{% load censor %}
+{% load custom_tags %}
+
+{% block title %}
+    NewsSearch
+{% endblock title %}
+
+{% block content %}
+
+<h1>Поиск новостей</h1>
+<h3>(всего новостей: {{ news|length }})</h3>
+    <form action="" method='GET'>
+    {{ filter.form.as_p }}
+        <input class="btn btn-primary" type='submit' value='Найти'>
+    </form>
+        <table>
+            <thead>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Дата публикации
+                </th>
+                <th>
+                    Содержание
+                </th>
+            </thead>
+            {% for news in filter.qs %}
+                <tr>
+                    <td>
+                        <a>{{ news.title|censor }}</a>
+                    </td>
+                    <td>
+                        {{ news.date|date:'d.m.Y' }}
+                    </td>
+                    <td>
+                        {{ news.content|truncatechars:50|censor }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+{% endblock content %}

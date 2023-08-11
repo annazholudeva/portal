@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+{% load censor %}
+
+<!-- Название у нас будет Post -->
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим саму новость, идентификатор которой был передан в url -->
+{% block content %}
+<h1>{{ Post }}</h1>
+    <hr>
+        <table class="table" style="width: justify">
+            <tr>
+                <td>{{ date|date:'M d Y' }}</td>
+                <td><strong>{{ news.title|censor }}</strong></td>
+                <td>{{ news.content }}</td>
+            </tr>
+        </table>
+{% endblock content %}
