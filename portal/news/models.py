@@ -49,7 +49,7 @@ class Post(models.Model):
         self.rating -= 1
         self.save()
 
-    def get_url(self):
+    def get_absolute_url(self):
         return reverse('news', kwargs={'pk': self.pk})
 
 

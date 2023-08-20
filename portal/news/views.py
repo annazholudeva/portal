@@ -1,5 +1,7 @@
 from datetime import datetime
-from django.urls import reverse_lazy
+
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy, resolve
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .filters import PostFilter
 from .forms import PostForm
@@ -39,12 +41,20 @@ class NewsCreate(CreateView):
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
+    # success_url = '/article/'
+    permission_required = ('news.news_edit',)
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.author.id = self.request.user.id
+        return super().form_valid(form)
 
 
-class NewsUpdate(UpdateView):
+class NewsUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
+    permission_required = ('news.news_edit',)
 
 
 class NewsDelete(DeleteView):

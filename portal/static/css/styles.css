@@ -130,6 +130,7 @@ h1, .h1 {
   h1, .h1 {
     font-size: 2.5rem;
   }
+  }
 }
 
 h2, .h2 {
@@ -274,7 +275,7 @@ pre {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
-  font-size: 0.875em;
+  font-size: 100em;
 }
 pre code {
   font-size: inherit;
@@ -11097,7 +11098,7 @@ body {
 }
 @media (min-width: 992px) {
   .masthead {
-    height: 100vh;
+    height: 10vh;
     padding: 0;
   }
   .masthead h1, .masthead .h1 {
