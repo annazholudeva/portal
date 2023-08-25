@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вышла новая публикация</title>
+    <style>
+    .lowercase {
+        text-transform: lowercase;
+    }
+    </style>
+</head>
+<body>
+    <h3> Опубликована новая статья в категории {{ news.category.name_category }}, на которую вы подписаны</h3>
+    <p> Заголовок: {{ news.title }}</p>
+    <p> Превью:{{ news.content|truncatechars:15 }}</p>
+
+    <p> Перейти к статье можно по <a href="{ link }">ссылке</a>.</p>
+</body>
+</html>

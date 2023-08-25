@@ -28,9 +28,9 @@
             </thead>
             {% for news in filter.qs %}
                 <tr>
-                    <td>
-                        <a>{{ news.title|censor }}</a>
-                    </td>
+                   <td>
+                       <a href="{% url 'news' pk=news.pk %}">{{ news.title|censor }}</a>
+                   </td>
                     <td>
                         {{ news.date|date:'d.m.Y' }}
                     </td>

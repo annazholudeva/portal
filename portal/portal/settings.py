@@ -47,13 +47,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
-    'news',
+    'news.apps.NewsConfig',
     'django_filters',
     'sign',
     'protect',
 ]
 
 SITE_ID = 1
+
+SITE_URL = 'http://127.0.0.1:8000'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -154,3 +156,20 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'zholudevaani'
+EMAIL_HOST_PASSWORD = 'jidhkrbhsalizglb'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+
+ADMINS = [
+    ('zholudeva.a.a', 'zholudeva.a.a@gmail.com')
+]
+
+MANAGERS = [
+    'Anna', 'zholudevaani@yandex.ru'
+]
+
+SERVER_EMAIL = 'zholudevaani@yandex.ru'

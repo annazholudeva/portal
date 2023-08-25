@@ -17,4 +17,8 @@ News
                 <td>{{ news.content }}</td>
             </tr>
         </table>
+    <form>
+        <a class="btn btn-primary" href="{% url 'news_delete' news.pk %}">Удалить</a>
+        <a class="btn btn-primary" href="{% url 'news_edit' news.pk %}">Редактировать</a>
+    </form>
 {% endblock content %}

@@ -1,11 +1,14 @@
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.urls import reverse_lazy, resolve
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from .filters import PostFilter
 from .forms import PostForm
-from .models import Post
+from .models import Post, Category
 
 
 class NewsList(ListView):
@@ -41,7 +44,6 @@ class NewsCreate(CreateView):
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
-    # success_url = '/article/'
     permission_required = ('news.news_edit',)
 
     def form_valid(self, form):
@@ -61,6 +63,7 @@ class NewsDelete(DeleteView):
     model = Post
     template_name = 'news_delete.html'
     success_url = reverse_lazy('allnews')
+    permission_required = ('news.news_delete',)
 
 
 class NewsSearch(ListView):
@@ -78,3 +81,29 @@ class NewsSearch(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
         return context
+
+
+class CategoryList(NewsList):
+    model = Post
+    template_name = 'category_list.html'
+    context_object_name = 'category_list'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, id=self.kwargs['pk'])
+        queryset = Post.objects.filter(category=self.category).order_by('-date')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_subscriber'] = self.request.user not in self.category.subscribes.all()
+        context['category'] = self.category
+        return context
+
+@login_required
+def subscribe(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    category.subscribes.add(user)
+
+    message = 'Вы подписаны на рассылку новостей категории'
+    return render(request, 'subscribe.html', {'category': category, 'message': message})
