@@ -10,15 +10,15 @@ News
 {% block content %}
 <h1>{{ Post }}</h1>
     <hr>
-        <table class="table" style="width: justify">
-            <tr>
-                <td>{{ date|date:'M d Y' }}</td>
-                <td><strong>{{ news.title|censor }}</strong></td>
-                <td>{{ news.content }}</td>
-            </tr>
-        </table>
+        <p>{{ date|date:'M d Y' }}</p>
+        <p> <strong>{{ news.title|censor }}</strong></p>
+    <hr>
+        <p>{{ news.content }}</p>
+        <p>{{ news.comment.content }}</p>
+    <br>
     <form>
         <a class="btn btn-primary" href="{% url 'news_delete' news.pk %}">Удалить</a>
         <a class="btn btn-primary" href="{% url 'news_edit' news.pk %}">Редактировать</a>
+        <a class="btn btn-primary" href="{% url 'allnews' %}">К списку новостей</a>
     </form>
 {% endblock content %}

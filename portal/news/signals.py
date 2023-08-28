@@ -1,10 +1,13 @@
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, mail_managers
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.conf import settings
 
-from portal.news.models import PostCategory
-from portal.portal import settings
+from .models import Post
+
+
+# from portal import settings
 
 
 def send_notification(preview, pk, title, subscribers):
@@ -27,14 +30,43 @@ def send_notification(preview, pk, title, subscribers):
     msg.send()
 
 
-@receiver(m2m_changed, sender=PostCategory)
+@receiver(m2m_changed, sender=Post.category.through)
 def notify_subscriber(sender, instance, **kwargs):
-    if kwargs['action'] == 'post_add':
+    if kwargs['action'] == 'news_create':
         categories = instance.category.all()
         subscribers_emails = []
+        subscribers = []
 
         for cat in categories:
             subscribers += cat.subscribers.all()
             subscribers_emails += [s.email for s in subscribers]
 
         send_notification(instance.preview(), instance.pk(), instance.title(), subscribers_emails)
+
+
+# def send_about_delete(preview, pk, title, author):
+#     html_content = render_to_string(
+#         'notification_delete.html',
+#         {
+#             'message': preview,
+#             'link': f'{settings.STATIC_URL}/news/{pk}'
+#         }
+#     )
+#
+#     msg = EmailMultiAlternatives(
+#         subject=title,
+#         body='',
+#         from_email=settings.DEFAULT_FROM_EMAIL,
+#         to=author,
+#     )
+#
+#
+# @receiver(news_delete, sender=Appointment)
+# def notify_managers_appointment_canceled(sender, instance, **kwargs):
+#     subject = f'Новость {instance.author} удалена'
+#     mail_managers(
+#         subject=subject,
+#         message=f'Новость {instance.author} удалена',
+#     )
+#
+#     print(subject)

@@ -3,40 +3,14 @@
 {% block content %}
 
 <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
-<h2>Страница автора {{author.name}}</h2>
+<h2>Страница автора {{author.author_user}}</h2>
 <hr>
-<hr>
-   {% if allnews %}
-    <h2>{{news|length}}</h2>
-       <table>
-           <tr>
-               <td><h2>Название</h2></td>
-               <td><h2>Дата</h2></td>
-               <td><h2>Текст</h2></td>
-               <td><h2>Комментарии к посту</h2></td>
 
-           </tr>
-
-           {% for news in allnews %}
-           <tr>
-               <td><a href="/news/{{news.id}}">{{ news.title }}</a></td>
-               <td>{{ news.date| date:'DATE_FORMAT' }}</td>
-               <td>{{ news.content|truncatechars:20 }}</td>
-
-               <td><a href="/news/{{news.id}}/all_responses">Открыть</a></td>
-
-           </tr>
-           {% endfor %}
-
-       </table>
-   {% else %}
-       <h2>Новостей нет!</h2>
-   {% endif %}
-
-<button> <a href="sign/logout/">Выйти</a> </button>
+<a class="btn btn-primary" href="news/">К новостям</a>
+<a class="btn btn-primary" href="sign/logout/">Выйти</a>
 
 {% if is_not_authors %}
-<button> <a href="sign/upgrade/"> Стать автором</a> </button>
+<a class="btn btn-primary" href="sign/upgrade/"> Стать автором</a>
 {% endif %}
 
 {% endblock %}
