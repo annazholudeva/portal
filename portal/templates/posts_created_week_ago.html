@@ -5,12 +5,10 @@
     <title>Cвежие новости за неделю</title>
 </head>
 <body>
-<h2>Добрый день! Все новости, что вы могли пропустить, за неделю:</h2>
-<ul>
+<h2>Добрый день! Все новости, что вы могли пропустить за неделю:</h2>
   {% for news in allnews %}
-    <li><a href="{{ link }}{{ news.get_absolute_url }}">{{ news.title }}</a></li>
+     <a class="nav-link" href="{% url 'news' pk=news.pk %}" >>{{ news.title }}</a>
   {% endfor %}
-</ul>
 
 </body>
 </html>
