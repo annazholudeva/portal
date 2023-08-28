@@ -42,31 +42,3 @@ def notify_subscriber(sender, instance, **kwargs):
             subscribers_emails += [s.email for s in subscribers]
 
         send_notification(instance.preview(), instance.pk(), instance.title(), subscribers_emails)
-
-
-# def send_about_delete(preview, pk, title, author):
-#     html_content = render_to_string(
-#         'notification_delete.html',
-#         {
-#             'message': preview,
-#             'link': f'{settings.STATIC_URL}/news/{pk}'
-#         }
-#     )
-#
-#     msg = EmailMultiAlternatives(
-#         subject=title,
-#         body='',
-#         from_email=settings.DEFAULT_FROM_EMAIL,
-#         to=author,
-#     )
-#
-#
-# @receiver(news_delete, sender=Appointment)
-# def notify_managers_appointment_canceled(sender, instance, **kwargs):
-#     subject = f'Новость {instance.author} удалена'
-#     mail_managers(
-#         subject=subject,
-#         message=f'Новость {instance.author} удалена',
-#     )
-#
-#     print(subject)

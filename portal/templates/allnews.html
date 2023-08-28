@@ -30,7 +30,7 @@ Post
                <tbody>
                <tr>
                    <td>
-                       <a class="nav-link" href="{% url 'news' pk=news.pk %}">{{ news.title|censor }}</a>
+                       <a class="nav-link" href="{{ link }}{{ news.get_absolute_url }}" >{{ news.title|censor }}</a>
                    </td>
                    <td>{{ date|date:'M d Y' }}</td>
                    <td>{% for category in news.category.all %}

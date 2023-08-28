@@ -14,7 +14,7 @@ News
         <p> <strong>{{ news.title|censor }}</strong></p>
     <hr>
         <p>{{ news.content }}</p>
-        <p>{{ news.comment.content }}</p>
+<!--        <p>{{ news.comment.content }}</p>-->
     <br>
     <form>
         <a class="btn btn-primary" href="{% url 'news_delete' news.pk %}">Удалить</a>

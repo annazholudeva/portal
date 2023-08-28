@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'sign',
     'protect',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -153,9 +154,9 @@ ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
@@ -173,3 +174,6 @@ MANAGERS = [
 ]
 
 SERVER_EMAIL = 'zholudevaani@yandex.ru'
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

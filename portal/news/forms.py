@@ -13,10 +13,10 @@ class PostForm(forms.ModelForm):
         label='Category',
     )
 
-    author = forms.ModelChoiceField(
-        queryset=User.objects.filter(),
-        label='Автор',
-    )
+    # author = forms.ModelChoiceField(
+    #     queryset=User.objects.filter(),
+    #     label='Автор',
+    # )
 
     class Meta:
         model = Post
