@@ -177,3 +177,15 @@ SERVER_EMAIL = 'zholudevaani@yandex.ru'
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
+
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_BROKER_URL = 'redis://default:ZM9xejNAiYF2mvUM1gpS6ji9fkChTqYz@redis-12183.c99.us-east-1-4.ec2.cloud.redislabs.com:12183'
+CELERY_RESULT_BACKEND = 'redis://default:ZM9xejNAiYF2mvUM1gpS6ji9fkChTqYz@redis-12183.c99.us-east-1-4.ec2.cloud.redislabs.com:12183'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
