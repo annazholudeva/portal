@@ -11,7 +11,6 @@ from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
-from django.utils.html import strip_tags
 
 
 logger = logging.getLogger(__name__)
