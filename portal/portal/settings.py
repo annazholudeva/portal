@@ -66,7 +66,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'portal.urls'
@@ -184,8 +187,15 @@ APSCHEDULER_RUN_NOW_TIMEOUT = 25
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
-CELERY_BROKER_URL = 'redis://default:ZM9xejNAiYF2mvUM1gpS6ji9fkChTqYz@redis-12183.c99.us-east-1-4.ec2.cloud.redislabs.com:12183'
-CELERY_RESULT_BACKEND = 'redis://default:ZM9xejNAiYF2mvUM1gpS6ji9fkChTqYz@redis-12183.c99.us-east-1-4.ec2.cloud.redislabs.com:12183'
+CELERY_BROKER_URL = '******************'
+CELERY_RESULT_BACKEND = '******************'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+    }
+}
