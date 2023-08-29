@@ -1,13 +1,11 @@
-from django.core.mail import EmailMultiAlternatives, mail_managers
+from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Post
-
-
-# from portal import settings
+from .models import PostCategory
+from portal import settings
 
 
 def send_notification(preview, pk, title, subscribers):
@@ -30,7 +28,7 @@ def send_notification(preview, pk, title, subscribers):
     msg.send()
 
 
-@receiver(m2m_changed, sender=Post.category.through)
+@receiver(m2m_changed, sender=PostCategory)
 def notify_subscriber(sender, instance, **kwargs):
     if kwargs['action'] == 'news_create':
         categories = instance.category.all()

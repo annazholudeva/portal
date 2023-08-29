@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h3> Опубликована новая статья в категории {{ news.category.name_category }}, на которую вы подписаны</h3>
+    <h3> Опубликована новая статья в категории {{ news.category.category_name }}, на которую вы подписаны</h3>
     <p> Заголовок: {{ news.title }}</p>
     <p> Превью:{{ news.content|truncatechars:15 }}</p>
 
