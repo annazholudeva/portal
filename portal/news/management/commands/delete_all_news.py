@@ -11,20 +11,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.readable()
-        self.stdout.write(
-            'Вы действительно хотите удалить все новости в категории {options["category"]? yes/no')  # спрашиваем пользователя, действительно ли он хочет удалить все товары
-        answer = input()  # считываем подтверждение
+        self.stdout.write(f'Вы правда хотите удалить все статьи в категории {options["category"]}? yes/no')
+        answer = input()
 
-        if answer == 'yes':  # в случае подтверждения действительно удаляем все товары
-            # Post.objects.all().delete()
-            self.stdout.write(self.style.SUCCESS('Удаление отменено'))
+        if answer != 'yes':
+            self.stdout.write(self.style.ERROR('Отменено'))
             return
-
         try:
-            category = Category.objects.get(name=options['category'])
+            category = Category.objects.get(category_name=options['category'])
             Post.objects.filter(category=category).delete()
-            self.stdout.write(self.style.SUCCESS(
-                f'Новости категории {category.name} удалены'))
-
+            self.stdout.write(self.style.SUCCESS(f'Succesfully deleted all news from category {category.category_name}')) # в случае неправильного подтверждения говорим, что в доступе отказано
         except Post.DoesNotExist:
             self.stdout.write(self.style.ERROR(f'Could not find category {category.category_name}'))
