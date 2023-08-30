@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -38,6 +39,15 @@ class NewsDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['date'] = datetime.utcnow()
         return context
+
+    def get_object(self, *args, **kwargs):
+        object_in_cache = cache.get(f'news-{self.kwargs["pk"]}', None)
+
+        if not object_in_cache:
+            object_in_cache = super().get_object(queryset=self.queryset)
+            cache.set(f'news-{self.kwargs["pk"]}', object_in_cache)
+
+        return object_in_cache
 
 
 class NewsCreate(CreateView):
