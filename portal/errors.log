@@ -1,0 +1,28 @@
+2023-08-31 20:41:08,405 ERROR Internal Server Error: /news/create/ C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\utils\log.py (<class 'ValueError'>, ValueError("save() prohibited to prevent data loss due to unsaved related object 'author'."), <traceback object at 0x00000235FCDCA980>)
+Traceback (most recent call last):
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+  File "C:\Users\user\Documents\GitHub\portal\portal\news\views.py", line 62, in form_valid
+    return super().form_valid(form)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\forms\models.py", line 542, in save
+    self.instance.save()
+  File "C:\Users\user\Documents\GitHub\portal\portal\news\models.py", line 58, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\db\models\base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\db\models\base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'author'.
+2023-08-31 20:41:08,412 ERROR "POST /news/create/ HTTP/1.1" 500 113677 C:\Users\user\Documents\GitHub\portal\venv\lib\site-packages\django\core\servers\basehttp.py None
